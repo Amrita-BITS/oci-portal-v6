@@ -1,0 +1,138 @@
+<!-- templates/partials/tab_services.html -->
+<div class="tab-content">
+  <!-- Service Groups Section -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Service Groups</h2>
+      <button class="btn btn-primary" onclick="showServiceGroupModal()">+ Create Group</button>
+    </div>
+
+    <div id="service-groups-list" class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Group Name</th>
+            <th>Description</th>
+            <th>Instances</th>
+            <th>Sequences</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="service-groups-body">
+          <tr>
+            <td colspan="7" style="text-align: center; color: #999;">Loading service groups...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Selected Group Details -->
+  <div id="group-details-section" class="section" style="display: none;">
+    <div class="section-header">
+      <h3 id="selected-group-name">Group Details</h3>
+      <button class="btn btn-secondary" onclick="clearGroupSelection()">← Back to Groups</button>
+    </div>
+
+    <!-- Instances Tab -->
+    <div class="details-tabs">
+      <button class="tab-link active" onclick="switchDetailsTab(event, 'instances-tab')">Instances</button>
+      <button class="tab-link" onclick="switchDetailsTab(event, 'sequences-tab')">Sequences</button>
+      <button class="tab-link" onclick="switchDetailsTab(event, 'execution-tab')">Execution</button>
+    </div>
+
+    <!-- Instances Management -->
+    <div id="instances-tab" class="details-tab-content active">
+      <div class="subsection-header">
+        <h4>Managed Instances</h4>
+        <button class="btn btn-sm btn-success" onclick="showAddInstanceModal()">+ Add Instance</button>
+      </div>
+      <div id="instances-list-container" class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Instance Name</th>
+              <th>Instance ID</th>
+              <th>Region</th>
+              <th>Compartment</th>
+              <th>Order</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="instances-body">
+            <tr>
+              <td colspan="6" style="text-align: center; color: #999;">No instances added</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Sequences Management -->
+    <div id="sequences-tab" class="details-tab-content" style="display: none;">
+      <div class="subsection-header">
+        <h4>Service Sequences</h4>
+        <button class="btn btn-sm btn-success" onclick="showAddSequenceModal()">+ Add Step</button>
+      </div>
+
+      <!-- START Sequence -->
+      <div class="sequence-section">
+        <h5>START Sequence</h5>
+        <div id="start-sequences-list" class="sequences-container">
+          <p style="color: #999; padding: 20px; text-align: center;">No START steps configured</p>
+        </div>
+      </div>
+
+      <!-- STOP Sequence -->
+      <div class="sequence-section">
+        <h5>STOP Sequence</h5>
+        <div id="stop-sequences-list" class="sequences-container">
+          <p style="color: #999; padding: 20px; text-align: center;">No STOP steps configured</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Execution Control -->
+    <div id="execution-tab" class="details-tab-content" style="display: none;">
+      <div class="subsection-header">
+        <h4>Execute Service</h4>
+      </div>
+
+      <div class="execution-controls">
+        <button class="btn btn-lg btn-success" onclick="executeServiceGroup('start')"
+                style="margin-right: 20px; font-size: 16px; padding: 12px 30px;">
+          <i class="ti ti-player-play"></i> START All
+        </button>
+        <button class="btn btn-lg btn-danger" onclick="executeServiceGroup('stop')"
+                style="font-size: 16px; padding: 12px 30px;">
+          <i class="ti ti-player-stop"></i> STOP All
+        </button>
+      </div>
+
+      <div class="subsection-header" style="margin-top: 40px;">
+        <h4>Execution History</h4>
+      </div>
+      <div id="execution-history-container" class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Action</th>
+              <th>Status</th>
+              <th>Started</th>
+              <th>Completed</th>
+              <th>Executed By</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="execution-history-body">
+            <tr>
+              <td colspan="6" style="text-align: center; color: #999;">No executions yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
